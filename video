@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video</title>
+
+    <style>
+        body{
+            text-align: center;
+        }
+        h1{
+            margin-top: 150px;
+        }
+        input{
+            width: 600px;
+            height: 50px;
+            margin-top: 30px;
+            padding-left: 20px;
+            display: inline-block;
+            border: 3px solid #4e6ef2;
+            border-radius: 10px 10px 10px 10px;
+        }
+        span{
+            font-size: 25px;
+            margin-right: 20px;
+        }
+        button {
+            display: inline-block;
+            padding: 15px 50px;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;   
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            margin: 60px 40px 0px 40px;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+        button:hover {background-color: #3e8e41}
+
+        button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        #input{
+            width: 600px;
+            height: 42px;
+            line-height: 5px;
+            padding-left: 20px;
+            display: inline-block;
+            border: 3px solid #4e6ef2;
+            border-radius: 10px 0px 0px 10px;
+        }
+        .a{
+            padding: 12px 30px 16px 30px;
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+            background-color: #4e6ef2;
+            border-radius: 0px 10px 10px 0px;
+        }
+        #a-duankou{
+            border-right: 3px solid #f00;
+            border-radius: 0px 0px 0px 0px;
+        }
+        a.a:hover{
+            color: #dd0;
+        }
+
+        #denglu{ display: block; }
+        #caozuo{ display: none; font-size: 0; }
+
+    </style>
+
+</head>
+<body>
+    <h1>影视资源观看</h1>
+    <div class="div-denglu" id="denglu">
+        <div class="zhanghao">
+            <span>账号</span>
+            <input type="text" id="input-zh" autocomplete="off">
+        </div>
+        <div class="mima">
+            <span>密码</span>
+            <input type="text" id="input-mm" autocomplete="off">
+        </div>
+        <button id="button-qinchuxingxi">清除信息</button>
+        <button id="button-jiaruQQqun">加入QQ群</button>
+        <button id="button-denglu">登陆</button>
+    </div>
+    <div class="div-caozuo" id="caozuo">
+        <div>
+            <input type="text" id="input" value="">
+            <a href="#" class="a" id="a-duankou">端口:10</a>
+            <a href="#" class="a" id="a-guankan" onClick="getinput()">观看</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        var zhanghao,mima,pan=0,set=10,Videoleft,VideoAout,VideoRight;;
+
+        $(document).ready(function(){
+            $("#button-qinchuxingxi").click(function(){
+                $('#input-zh').val('');
+                $('#input-mm').val('');
+            })
+            $("#button-denglu").click(function(){
+               zhanghao = document.getElementById('input-zh').value;
+               mima = document.getElementById('input-mm').value;
+                    var date = new Date();
+                    var month = date.getMonth() + 1;
+                    var strDate = date.getDate();
+                    var time = date.getFullYear()+""+month+""+strDate;
+                    console.log(time)
+               if(zhanghao == "000" && mima == "111"){
+                    if(time < 2020510){ pan = 1; }
+               }else if(zhanghao == "130" && mima == "3210"){
+                    pan = 1;
+               }
+               if(pan > 0){
+                    document.getElementById("denglu").style.display="none";
+                    document.getElementById("caozuo").style.display="inline"; 
+               }else{
+                    alert("你输入账号密码不正确或账号过期");
+               }
+            })
+            $("#a-duankou").click(function(){
+                set = set + 10;
+                if(set == 60){ set = 10 }
+                document.getElementById("a-duankou").innerHTML = "端口:"+set+"";
+                console.log(set)
+            })
+            $("#a-guankan").click(function(){
+
+                if(pan > 0){
+                    VideoAout = document.getElementById('input').value;
+                    if(set == 10){
+                        Videoleft = "https://hd1.o0omvo0o.com/"
+                        VideoRight = "/SD/playlist.m3u8"
+                    }else if(set == 20){
+                        Videoleft ="https://hl4.lhav46.com/video/m3u8/";
+                        VideoRight = "/playlist.m3u8";
+                    }
+                    var Video = Videoleft + VideoAout + VideoRight;
+                    window.open(Video);
+                }else{ alert("你还没有登陆哦"); }
+            })
+         })
+
+    </script>
+</body>
+</html>
